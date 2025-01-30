@@ -1,13 +1,17 @@
 import Filter from "@/components/Filter";
+import HeaderResponsive from "@/components/ResponsiveComponents/HeaderResponsive";
 import Headers from "@/components/Headers";
 import ListCardBlogs from "@/components/ListCardBlogs";
-import Navbar from "@/components/Navbar";
-import Image from "next/image";
 
 export default function Home() {
   return (
     <div>
-      <Headers />
+      <div className="hidden md:block">
+        <Headers />
+      </div>
+      <div className="block md:hidden">
+        <HeaderResponsive />
+      </div>
       <Filter />
       <ListCardBlogs />
     </div>

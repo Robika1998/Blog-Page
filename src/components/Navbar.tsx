@@ -3,32 +3,52 @@ import Image from "next/image";
 import logo from "../../public/assets/logo/logo.png";
 import searchLogo from "../../public/assets/image/search.png";
 import downLogo from "../../public/assets/image/down.png";
-import homeLogo from "../../public/assets/image/home.png";
-import linkdinLogo from "../../public/assets/image/social.png";
-import rightLogo from "../../public/assets/image/right.png";
+import listIcon from "../../public/assets/image/listIcon.png";
+import MobileMenu from "./ResponsiveComponents/NavbarListResponsive";
+import logoResponse from "../../public/assets/image/respLogo.png";
 
 const Navbar = () => {
+  let isMenuOpen = false;
+  const toggleMenu = () => {
+    const menu = document.querySelector("#mobile-menu");
+    menu?.classList.toggle("hidden");
+  };
+
   return (
-    <nav className="bg-white border-b shadow-sm">
+    <nav className="bg-bcBg lg:bg-white border-b shadow-sm ">
       <div className="container mx-auto px-4 h-[80px] flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Image src={logo} alt="Logo" width={260} height={250} />
+          <Image
+            src={logo}
+            alt="Logo"
+            width={260}
+            height={250}
+            className="hidden lg:block"
+          />
+
+          <Image
+            src={logoResponse}
+            alt="Logo"
+            width={50}
+            height={50}
+            className="lg:hidden"
+          />
         </div>
 
-        <div className="flex gap-16 px-5">
+        <div className="hidden lg:flex gap-16 px-5">
           <ul className="flex items-center gap-6 text-sm font-medium">
             <li>
-              <Link href="/currency-rates" className="hover:text-blue-600">
+              <Link href="" className="hover:text-blue-600">
                 ბლოგი
               </Link>
             </li>
             <li>
-              <Link href="/news" className="hover:text-blue-600">
+              <Link href="" className="hover:text-blue-600">
                 მედია
               </Link>
             </li>
             <li>
-              <Link href="/contact" className="hover:text-blue-600">
+              <Link href="" className="hover:text-blue-600">
                 კარიერა
               </Link>
             </li>
@@ -62,66 +82,58 @@ const Navbar = () => {
             </div>
           </div>
         </div>
+        <div className="lg:hidden flex items-center">
+          <button onClick={toggleMenu} className="text-gray-700">
+            <Image src={listIcon} alt="Menu" width={30} height={30} />
+          </button>
+        </div>
       </div>
 
-      <div className="bg-[#32333E] text-white  h-[69px] flex items-center ">
+      <MobileMenu isOpen={isMenuOpen} />
+
+      <div className="bg-bcBg text-white h-[69px] hidden lg:flex items-center">
         <ul className="container mx-auto flex gap-6 text-sm font-medium px-6 justify-around">
           <li>
-            <Link href="/about" className="hover:underline">
+            <Link href="" className="hover:underline">
               ბანკის შესახებ
             </Link>
           </li>
           <li>
-            <Link href="/monetary-policy" className="hover:underline">
+            <Link href="" className="hover:underline">
               მონეტარული პოლიტიკა
             </Link>
           </li>
           <li>
-            <Link href="/statistics" className="hover:underline">
+            <Link href="" className="hover:underline">
               ფინანსური სტატისტიკა
             </Link>
           </li>
           <li>
-            <Link href="/regulations" className="hover:underline">
+            <Link href="" className="hover:underline">
               ზედამხედველობა
             </Link>
           </li>
           <li>
-            <Link href="/publications" className="hover:underline">
+            <Link href="" className="hover:underline">
               ქართული ფული
             </Link>
           </li>
           <li>
-            <Link href="/news" className="hover:underline">
+            <Link href="" className="hover:underline">
               საგადასახადო სისტემები
             </Link>
           </li>
           <li>
-            <Link href="/contact" className="hover:underline">
+            <Link href="" className="hover:underline">
               სტატისტიკა
             </Link>
           </li>
           <li>
-            <Link href="/contact" className="hover:underline">
+            <Link href="" className="hover:underline">
               პუბლიკაციები
             </Link>
           </li>
         </ul>
-      </div>
-
-      <div className="h-[69px] container mx-auto flex px-9 text-sm font-medium  justify-between">
-        <div className="flex items-center gap-4 ">
-          <Image src={homeLogo} alt="Home Logo" width={17} height={13} />
-          <Link href="">მთავარი </Link>
-          <Image src={rightLogo} alt="Home Logo" width={8} height={8} />
-          <Link href="">ბლოგი</Link>
-        </div>
-        <div className="flex items-center gap-2">
-          <Image src={linkdinLogo} alt="LinkedIn Logo" width={20} height={20} />
-          <Image src={linkdinLogo} alt="LinkedIn Logo" width={20} height={20} />
-          <Image src={linkdinLogo} alt="LinkedIn Logo" width={20} height={20} />
-          <Image src={linkdinLogo} alt="LinkedIn Logo" width={20} height={20} />
-        </div>
       </div>
     </nav>
   );

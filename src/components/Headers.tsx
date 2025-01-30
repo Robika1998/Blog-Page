@@ -1,8 +1,11 @@
 "use client";
 import Image from "next/image";
 import headerLogo from "../../public/assets/image/headerPhoto.png";
-import imageBlogsAuthor from "../../public/assets/image/imageBlogs.png";
 import MainCardBlogs from "./MainCardBlog";
+import homeLogo from "../../public/assets/image/home.png";
+import linkdinLogo from "../../public/assets/image/social.png";
+import rightLogo from "../../public/assets/image/right.png";
+import Link from "next/link";
 
 export default function Headers() {
   const handleClick = (event: any) => {
@@ -28,6 +31,20 @@ export default function Headers() {
 
   return (
     <div>
+      <div className="h-[69px] container mx-auto flex px-9 text-sm font-medium  justify-between">
+        <div className="flex items-center gap-4 ">
+          <Image src={homeLogo} alt="Home Logo" width={17} height={13} />
+          <Link href="">მთავარი </Link>
+          <Image src={rightLogo} alt="Home Logo" width={8} height={8} />
+          <Link href="">ბლოგი</Link>
+        </div>
+        <div className="flex items-center gap-2">
+          <Image src={linkdinLogo} alt="LinkedIn Logo" width={20} height={20} />
+          <Image src={linkdinLogo} alt="LinkedIn Logo" width={20} height={20} />
+          <Image src={linkdinLogo} alt="LinkedIn Logo" width={20} height={20} />
+          <Image src={linkdinLogo} alt="LinkedIn Logo" width={20} height={20} />
+        </div>
+      </div>
       <div className="relative w-screen h-[575px]">
         <Image
           alt="Header Logo"

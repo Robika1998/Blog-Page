@@ -18,7 +18,7 @@ export default function ListCardBlogs() {
   return (
     <div className="flex flex-col items-start gap-4 p-8 bg-[#E1E1E1]">
       <div className="flex items-center text-[#6D9696] gap-1 pl-56">
-        <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[10px] border-t-red-500"></div>
+        <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[10px] border-[#6D9696] mt-1"></div>
         <p>დალაგება</p>
         <Image src={downLogo} alt="Logo" width={18} height={18} />
       </div>

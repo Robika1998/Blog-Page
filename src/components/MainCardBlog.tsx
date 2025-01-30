@@ -19,10 +19,10 @@ export default function MainCardBlogs({
       <div className="flex justify-center items-center p-6">
         <Image src={imageBlogsAuthor} alt="blog" width={416} height={306} />
       </div>
-      <div className="p-4">
+      <div className="px-7 ">
         <p className="text-sm text-gray-500 mb-2">{date}</p>
-        <h2 className="text-lg mb-5 h-16">{title}</h2>
-        <div className="flex justify-start items-center gap-3 mt-4">
+        <h2 className="text-lg mb-5 h-12">{title}</h2>
+        <div className="flex justify-start items-center gap-3 mt-4 ">
           <button
             className={`${buttCol} text-[#6D9696] text-xs rounded-md w-[88px] h-[24px] flex items-center gap-2 px-2`}
           >
