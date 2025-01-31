@@ -6,6 +6,10 @@ import linkdinLogo from "../../../public/assets/image/social.png";
 import rightLogo from "../../../public/assets/image/right.png";
 import Link from "next/link";
 import MainCardBlogsResponsive from "./MainCardBlogsResponsive";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { useEffect, useState } from "react";
+import { fetchBlogs } from "@/redux/actions/blogActions";
 
 export default function HeaderResponsive() {
   const handleClick = (event: any) => {
@@ -19,15 +23,15 @@ export default function HeaderResponsive() {
     event.target.classList.add("bg-[#6D9696]", "text-white");
     event.target.classList.remove("bg-transparent", "text-black");
   };
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const blogData = [
-    { date: "2024-01-10", title: "ბლოგის პირველი სტატია" },
-    { date: "2024-01-15", title: "ეკონომიკური ანალიზი და პროგნოზები" },
-    {
-      date: "2024-01-20",
-      title: "ტექნოლოგიური ინოვაციები საბანკო ინოვაციები საბანკო ",
-    },
-  ];
+  const blogs = useSelector((state: RootState) => state.blog.blogs);
+  const loading = useSelector((state: RootState) => state.blog.loading);
+  const error = useSelector((state: RootState) => state.blog.error);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchBlogs() as any);
+  }, []);
 
   return (
     <div className="bg-[#E1E1E1]">
@@ -106,12 +110,28 @@ export default function HeaderResponsive() {
         </div>
       </div>
 
-      <div className="flex flex-wrap justify-center items-center gap-6 p-8 bg-[#E1E1E1]">
-        {blogData.map((blog, index) => (
+      {loading && <p>Loading blogs...</p>}
+      {error && <p className="text-red-500">Error fetching blogs: {error}</p>}
+
+      {/* <div className="flex flex-wrap justify-center items-center gap-6 p-8 bg-[#E1E1E1]">
+        {blogs.slice(0, 1).map((blog, index) => (
           <MainCardBlogsResponsive
             key={index}
-            date={blog.date}
+            date={new Date(blog.createDate).toLocaleDateString("ka-GE")}
             title={blog.title}
+            image={blog.image}
+            description={blog.description}
+          />
+        ))}
+      </div> */}
+      <div className="flex flex-wrap justify-center items-center gap-6 p-8 bg-[#E1E1E1]">
+        {blogs.slice(0, 1).map((blog, index) => (
+          <MainCardBlogsResponsive
+            key={index}
+            date={new Date(blog.createDate).toLocaleDateString("ka-GE")}
+            title={blog.title}
+            image={blog.image}
+            description={blog.description}
           />
         ))}
       </div>

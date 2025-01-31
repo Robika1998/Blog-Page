@@ -1,9 +1,10 @@
 import Image from "next/image";
-import imageBlogsAuthor from "../../public/assets/image/imageBlogs.png";
+import { Envriment } from "@/api/ApiManager";
 
 interface MainCardBlogsProps {
   date: string;
   title: string;
+  image: string;
   bgColor?: string;
   buttCol?: string;
 }
@@ -11,13 +12,19 @@ interface MainCardBlogsProps {
 export default function MainCardBlogs({
   date,
   title,
+  image,
   bgColor = "bg-[#BECBCB]",
   buttCol = "bg-white",
 }: MainCardBlogsProps) {
   return (
     <div className={`${bgColor}  rounded-md w-[465px] h-[509px]`}>
       <div className="flex justify-center items-center p-6">
-        <Image src={imageBlogsAuthor} alt="blog" width={416} height={306} />
+        <Image
+          src={Envriment.baseFileManager + "/" + image}
+          alt="blog"
+          width={416}
+          height={306}
+        />
       </div>
       <div className="px-7 ">
         <p className="text-sm text-gray-500 mb-2">{date}</p>

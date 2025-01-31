@@ -1,19 +1,20 @@
-import MainCardBlogs from "./MainCardBlog";
+"use client";
 import downLogo from "../../public/assets/image/down.png";
 import Image from "next/image";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@/redux/store";
+import { useEffect } from "react";
+import { fetchBlogs } from "@/redux/actions/blogActions";
+import MainCardBlogs from "./MainCardBlog";
 
 export default function ListCardBlogs() {
-  const blogData = [
-    { date: "2024-01-10", title: "ბლოგის პირველი სტატია" },
-    { date: "2024-01-15", title: "ეკონომიკური ანალიზი და პროგნოზები" },
-    { date: "2024-01-20", title: "ტექნოლოგიური ინოვაციები საბანკო " },
-    { date: "2024-01-10", title: "ბლოგის პირველი სტატია" },
-    { date: "2024-01-15", title: "ეკონომიკური ანალიზი და პროგნოზები" },
-    { date: "2024-01-20", title: "ტექნოლოგიური ინოვაციები საბანკო " },
-    { date: "2024-01-10", title: "ბლოგის პირველი სტატია" },
-    { date: "2024-01-15", title: "ეკონომიკური ანალიზი და პროგნოზები" },
-    { date: "2024-01-20", title: "ტექნოლოგიური ინოვაციები საბანკო  " },
-  ];
+  const blogs = useSelector((state: RootState) => state.blog.blogs);
+  const loading = useSelector((state: RootState) => state.blog.loading);
+  const error = useSelector((state: RootState) => state.blog.error);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchBlogs() as any);
+  }, []);
 
   return (
     <div className="flex flex-col items-start gap-4 p-8 bg-[#E1E1E1]">
@@ -22,16 +23,22 @@ export default function ListCardBlogs() {
         <p>დალაგება</p>
         <Image src={downLogo} alt="Logo" width={18} height={18} />
       </div>
+      {loading && <p>Loading blogs...</p>}
+      {error && <p className="text-red-500">Error fetching blogs: {error}</p>}
+
       <div className="flex flex-wrap justify-center gap-6 w-full">
-        {blogData.map((blog, index) => (
-          <MainCardBlogs
-            key={index}
-            date={blog.date}
-            title={blog.title}
-            bgColor="bg-[#E1E1E1]"
-            buttCol="bg-gray-100"
-          />
-        ))}
+        {blogs.length > 0
+          ? blogs.map((blog, index) => (
+              <MainCardBlogs
+                key={index}
+                date={new Date(blog.createDate).toLocaleDateString("ka-GE")}
+                title={blog.title}
+                image={blog.image}
+                bgColor="bg-[#E1E1E1]"
+                buttCol="bg-gray-100"
+              />
+            ))
+          : !loading && <p>No blogs available.</p>}
       </div>
     </div>
   );

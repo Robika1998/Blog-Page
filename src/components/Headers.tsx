@@ -6,6 +6,10 @@ import homeLogo from "../../public/assets/image/home.png";
 import linkdinLogo from "../../public/assets/image/social.png";
 import rightLogo from "../../public/assets/image/right.png";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { useEffect } from "react";
+import { fetchBlogs } from "@/redux/actions/blogActions";
 
 export default function Headers() {
   const handleClick = (event: any) => {
@@ -20,14 +24,13 @@ export default function Headers() {
     event.target.classList.remove("bg-transparent", "text-black");
   };
 
-  const blogData = [
-    { date: "2024-01-10", title: "ბლოგის პირველი სტატია" },
-    { date: "2024-01-15", title: "ეკონომიკური ანალიზი და პროგნოზები" },
-    {
-      date: "2024-01-20",
-      title: "ტექნოლოგიური ინოვაციები საბანკო ინოვაციები საბანკო ",
-    },
-  ];
+  const blogs = useSelector((state: RootState) => state.blog.blogs);
+  const loading = useSelector((state: RootState) => state.blog.loading);
+  const error = useSelector((state: RootState) => state.blog.error);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchBlogs() as any);
+  }, []);
 
   return (
     <div>
@@ -101,9 +104,26 @@ export default function Headers() {
       </div>
 
       <div className="flex flex-wrap justify-center items-center gap-6 p-8 bg-[#E1E1E1]">
-        {blogData.map((blog, index) => (
+        {/* {blogData.map((blog, index) => (
           <MainCardBlogs key={index} date={blog.date} title={blog.title} />
-        ))}
+        ))} */}
+
+        {loading && <p>Loading blogs...</p>}
+        {error && <p className="text-red-500">Error fetching blogs: {error}</p>}
+
+        <div className="flex flex-wrap justify-center gap-6 w-full">
+          {blogs.length > 0
+            ? blogs.map((blog, index) => (
+                <MainCardBlogs
+                  key={index}
+                  date={new Date(blog.createDate).toLocaleDateString("ka-GE")}
+                  title={blog.title}
+                  image={blog.image}
+                  buttCol="bg-gray-100"
+                />
+              ))
+            : !loading && <p>No blogs available.</p>}
+        </div>
       </div>
     </div>
   );
