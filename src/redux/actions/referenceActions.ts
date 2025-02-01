@@ -30,7 +30,7 @@ export const fetchBlogCategories = () => {
       }
 
       const data = await response.json();
-      dispatch({ type: FETCH_BLOG_CATEGORIES_SUCCESS, payload: data });
+      dispatch({ type: FETCH_BLOG_CATEGORIES_SUCCESS, payload: data.data });
     } catch (error: any) {
       dispatch({ type: FETCH_BLOG_CATEGORIES_FAILURE, payload: error.message });
     }
@@ -58,7 +58,7 @@ export const fetchBlogAuthors = () => {
       }
 
       const data = await response.json();
-      dispatch({ type: FETCH_BLOG_AUTHORS_SUCCESS, payload: data });
+      dispatch({ type: FETCH_BLOG_AUTHORS_SUCCESS, payload: data.data });
     } catch (error: any) {
       dispatch({ type: FETCH_BLOG_AUTHORS_FAILURE, payload: error.message });
     }

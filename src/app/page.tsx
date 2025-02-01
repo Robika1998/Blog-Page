@@ -13,7 +13,7 @@ export default function Home() {
         <HeaderResponsive />
       </div>
       <Filter />
-      <ListCardBlogs />
+      {/* <ListCardBlogs /> */}
     </div>
   );
 }
