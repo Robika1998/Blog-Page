@@ -126,13 +126,26 @@ export default function HeaderResponsive() {
       </div> */}
       <div className="flex flex-wrap justify-center items-center gap-6 p-8 bg-[#E1E1E1]">
         {blogs.slice(0, 1).map((blog, index) => (
-          <MainCardBlogsResponsive
-            key={index}
-            date={new Date(blog.createDate).toLocaleDateString("ka-GE")}
-            title={blog.title}
-            image={blog.image}
-            description={blog.description}
-          />
+          // <MainCardBlogsResponsive
+          //   key={index}
+          //   date={new Date(blog.createDate).toLocaleDateString("ka-GE")}
+          //   title={blog.title}
+          //   image={blog.image}
+          //   description={blog.description}
+          // />
+
+<MainCardBlogsResponsive
+  key={currentIndex}
+  date={new Date(blogs[currentIndex].createDate).toLocaleDateString("ka-GE")}
+  title={blogs[currentIndex].title}
+  image={blogs[currentIndex].image}
+  description={blogs[currentIndex].description}
+  currentIndex={currentIndex}
+  setCurrentIndex={setCurrentIndex}
+  totalBlogs={blogs.length}
+/>
+
+
         ))}
       </div>
     </div>
