@@ -28,8 +28,7 @@ const referenceReducer = (state = initialState, action: any) => {
       return {
         ...state,
         loading: false,
-        // categories: action.payload,
-        categories: action.payload || [], 
+        categories: action.payload || [],
       };
 
     case FETCH_BLOG_AUTHORS_SUCCESS:

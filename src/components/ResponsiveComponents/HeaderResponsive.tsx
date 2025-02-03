@@ -9,9 +9,16 @@ import MainCardBlogsResponsive from "./MainCardBlogsResponsive";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { useEffect, useState } from "react";
-import { fetchBlogs } from "@/redux/actions/blogActions";
+import { fetchPinnedBlogs } from "@/redux/actions/blogActions";
 
 export default function HeaderResponsive() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const pinnedBlogs = useSelector((state: RootState) => state.blog.pinnedBlogs);
+  const loading = useSelector((state: RootState) => state.blog.loading);
+  const error = useSelector((state: RootState) => state.blog.error);
+  const dispatch = useDispatch();
+  const [headerPinnedBlogs, setHeaderPinnedBlogs] = useState<any[]>([]);
+
   const handleClick = (event: any) => {
     const buttons = document.querySelectorAll(".toggle-button");
 
@@ -23,15 +30,15 @@ export default function HeaderResponsive() {
     event.target.classList.add("bg-[#6D9696]", "text-white");
     event.target.classList.remove("bg-transparent", "text-black");
   };
-  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const blogs = useSelector((state: RootState) => state.blog.blogs);
-  const loading = useSelector((state: RootState) => state.blog.loading);
-  const error = useSelector((state: RootState) => state.blog.error);
-  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchBlogs() as any);
-  }, []);
+    dispatch(fetchPinnedBlogs(0, 5) as any);
+  }, [dispatch]);
+  useEffect(() => {
+    if (pinnedBlogs.length > 0 && headerPinnedBlogs.length === 0) {
+      setHeaderPinnedBlogs(pinnedBlogs.slice(0, 5));
+    }
+  }, [pinnedBlogs]);
 
   return (
     <div className="bg-[#E1E1E1]">
@@ -113,39 +120,20 @@ export default function HeaderResponsive() {
       {loading && <p>Loading blogs...</p>}
       {error && <p className="text-red-500">Error fetching blogs: {error}</p>}
 
-      {/* <div className="flex flex-wrap justify-center items-center gap-6 p-8 bg-[#E1E1E1]">
-        {blogs.slice(0, 1).map((blog, index) => (
+      <div className="flex flex-wrap justify-center items-center gap-6  p-2 bg-[#E1E1E1]">
+        {headerPinnedBlogs.slice(0, 1).map((blog, index) => (
           <MainCardBlogsResponsive
-            key={index}
-            date={new Date(blog.createDate).toLocaleDateString("ka-GE")}
-            title={blog.title}
-            image={blog.image}
-            description={blog.description}
+            key={currentIndex}
+            date={new Date(
+              headerPinnedBlogs[currentIndex].createDate
+            ).toLocaleDateString("ka-GE")}
+            title={headerPinnedBlogs[currentIndex].title}
+            image={headerPinnedBlogs[currentIndex].image}
+            description={headerPinnedBlogs[currentIndex].description}
+            currentIndex={currentIndex}
+            setCurrentIndex={setCurrentIndex}
+            totalBlogs={headerPinnedBlogs.length}
           />
-        ))}
-      </div> */}
-      <div className="flex flex-wrap justify-center items-center gap-6 p-8 bg-[#E1E1E1]">
-        {blogs.slice(0, 1).map((blog, index) => (
-          // <MainCardBlogsResponsive
-          //   key={index}
-          //   date={new Date(blog.createDate).toLocaleDateString("ka-GE")}
-          //   title={blog.title}
-          //   image={blog.image}
-          //   description={blog.description}
-          // />
-
-<MainCardBlogsResponsive
-  key={currentIndex}
-  date={new Date(blogs[currentIndex].createDate).toLocaleDateString("ka-GE")}
-  title={blogs[currentIndex].title}
-  image={blogs[currentIndex].image}
-  description={blogs[currentIndex].description}
-  currentIndex={currentIndex}
-  setCurrentIndex={setCurrentIndex}
-  totalBlogs={blogs.length}
-/>
-
-
         ))}
       </div>
     </div>

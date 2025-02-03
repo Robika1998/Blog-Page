@@ -8,8 +8,8 @@ import rightLogo from "../../public/assets/image/right.png";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { useEffect } from "react";
-import { fetchBlogs } from "@/redux/actions/blogActions";
+import { useEffect, useState } from "react";
+import { fetchPinnedBlogs } from "@/redux/actions/blogActions";
 
 export default function Headers() {
   const handleClick = (event: any) => {
@@ -24,13 +24,19 @@ export default function Headers() {
     event.target.classList.remove("bg-transparent", "text-black");
   };
 
-  const blogs = useSelector((state: RootState) => state.blog.blogs);
+  const pinnedBlogs = useSelector((state: RootState) => state.blog.pinnedBlogs);
   const loading = useSelector((state: RootState) => state.blog.loading);
   const error = useSelector((state: RootState) => state.blog.error);
   const dispatch = useDispatch();
+  const [headerPinnedBlogs, setHeaderPinnedBlogs] = useState<any[]>([]);
   useEffect(() => {
-    dispatch(fetchBlogs() as any);
-  }, []);
+    dispatch(fetchPinnedBlogs(0, 5) as any);
+  }, [dispatch]);
+  useEffect(() => {
+    if (pinnedBlogs.length > 0 && headerPinnedBlogs.length === 0) {
+      setHeaderPinnedBlogs(pinnedBlogs.slice(0, 5));
+    }
+  }, [pinnedBlogs]);
 
   return (
     <div>
@@ -86,16 +92,16 @@ export default function Headers() {
         </p>
       </div>
 
-      <div className="flex justify-center items-center bg-[#E1E1E1] py-8">
-        <div className="flex gap-0">
+      <div className="flex  justify-center items-center bg-[#E1E1E1] py-8">
+        <div className="flex gap-0 ">
           <button
-            className="toggle-button w-[725px] h-[55px] border border-[#6D9696] rounded-tl-md rounded-bl-md bg-[#6D9696] text-white transition"
+            className="toggle-button w-[725px] h-[55px] max_Xll:w-[467px] max_md2:w-[367px] border border-[#6D9696] rounded-tl-md rounded-bl-md bg-[#6D9696] text-white transition"
             onClick={handleClick}
           >
             ბლოგი
           </button>
           <button
-            className="toggle-button w-[725px] h-[55px] border border-[#6D9696] rounded-tr-md rounded-br-md bg-transparent text-black  transition"
+            className="toggle-button w-[725px] h-[55px] max_Xll:w-[467px] max_md2:w-[367px] border border-[#6D9696] rounded-tr-md rounded-br-md bg-transparent text-black  transition"
             onClick={handleClick}
           >
             პროფესიული ბლოგი
@@ -104,16 +110,12 @@ export default function Headers() {
       </div>
 
       <div className="flex flex-wrap justify-center items-center gap-6 p-8 bg-[#E1E1E1]">
-        {/* {blogData.map((blog, index) => (
-          <MainCardBlogs key={index} date={blog.date} title={blog.title} />
-        ))} */}
-
         {loading && <p>Loading blogs...</p>}
         {error && <p className="text-red-500">Error fetching blogs: {error}</p>}
 
         <div className="flex flex-wrap justify-center gap-6 w-full">
-          {blogs.length > 0
-            ? blogs.map((blog, index) => (
+          {headerPinnedBlogs.length > 0
+            ? headerPinnedBlogs.map((blog, index) => (
                 <MainCardBlogs
                   key={index}
                   date={new Date(blog.createDate).toLocaleDateString("ka-GE")}
@@ -122,7 +124,7 @@ export default function Headers() {
                   buttCol="bg-gray-100"
                 />
               ))
-            : !loading && <p>No blogs available.</p>}
+            : !loading && <p>No pinned blogs available.</p>}
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@ export default function MainCardBlogs({
   buttCol = "bg-white",
 }: MainCardBlogsProps) {
   return (
-    <div className={`${bgColor}  rounded-md w-[465px] h-[450px]`}>
+    <div className={`${bgColor} rounded-md w-[465px] h-[450px] flex flex-col`}>
       <div className="flex justify-center items-center p-6">
         <Image
           src={Envriment.baseFileManager + "/" + image}
@@ -26,10 +26,10 @@ export default function MainCardBlogs({
           height={306}
         />
       </div>
-      <div className="px-7 ">
+      <div className="px-7 flex flex-col flex-2">
         <p className="text-sm text-gray-500 mb-2">{date}</p>
-        <h2 className="text-lg mb-5 h-12">{title}</h2>
-        <div className="flex justify-start items-center gap-3 mt-4 ">
+        <h2 className="text-lg mb-5 min-h-10">{title}</h2>
+        <div className="flex justify-start items-center gap-3 mt-auto h-16">
           <button
             className={`${buttCol} text-[#6D9696] text-xs rounded-md w-[88px] h-[24px] flex items-center gap-2 px-2`}
           >

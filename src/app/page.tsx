@@ -1,4 +1,4 @@
-import Filter from "@/components/Filter";
+import Filter from "@/components/FilterData/Filter";
 import HeaderResponsive from "@/components/ResponsiveComponents/HeaderResponsive";
 import Headers from "@/components/Headers";
 import ListCardBlogs from "@/components/ListCardBlogs";
