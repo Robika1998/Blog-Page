@@ -1,3 +1,5 @@
+
+
 "use client";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -19,16 +21,16 @@ export default function ListCardBlogs() {
   }, [sortBy]);
 
   return (
-    <div className="flex flex-col bg-[#E1E1E1]  ">
-      <div className="flex justify-around "></div>
-      <div className="bg-[#E1E1E1]">
+    <div className="flex flex-col bg-[#E1E1E1] w-full">
+      <div className="flex justify-around"></div>
+      <div className="bg-[#E1E1E1] w-full">
         {error && <p className="text-red-500">Error fetching blogs: {error}</p>}
 
-        <div className="flex justify-center items-center flex-col ">
+        <div className="flex justify-center items-center flex-col w-full">
           <div className="flex mr-[63%]">
             <SortByDate />
           </div>
-          <div className="flex flex-wrap justify-center items-center ">
+          <div className="flex flex-wrap justify-center w-full px-4">
             {blogs.length > 0
               ? blogs.map((blog, index) => (
                   <MainCardBlogs

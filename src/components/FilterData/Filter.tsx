@@ -52,7 +52,7 @@ export default function Filter() {
     <div>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-wrap justify-center items-center gap-4 p-10 bg-[#E1E1E1] rounded-lg"
+        className="flex flex-wrap justify-center items-center gap-4 p-10 bg-[#E1E1E1]"
       >
         <label className="border bg-[#E1E1E1] border-gray-400 rounded-lg p-2 w-[600px] md:w-[467px] h-[50px] flex items-center">
           <input
