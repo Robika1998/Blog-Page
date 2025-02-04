@@ -97,7 +97,7 @@ export default function MainCardBlogsResponsive({
       <div className="flex flex-col justify-between w-[50%]">
         <div>
           <p className="text-[10px] text-gray-500">{date}</p>
-          <h2 className="text-[11px] font-bold mb-2 text-[#333] leading-snug">
+          <h2 className="text-[11px] font-bold mb-2 h-12 text-[#333] leading-snug">
             {title}
           </h2>
           <p className="text-[10px] text-gray-600 ">
