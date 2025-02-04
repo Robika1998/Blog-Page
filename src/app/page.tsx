@@ -1,7 +1,6 @@
 import Filter from "@/components/FilterData/Filter";
 import HeaderResponsive from "@/components/ResponsiveComponents/HeaderResponsive";
 import Headers from "@/components/Headers";
-import ListCardBlogs from "@/components/ListCardBlogs";
 
 export default function Home() {
   return (
@@ -13,7 +12,6 @@ export default function Home() {
         <HeaderResponsive />
       </div>
       <Filter />
-      {/* <ListCardBlogs /> */}
     </div>
   );
 }

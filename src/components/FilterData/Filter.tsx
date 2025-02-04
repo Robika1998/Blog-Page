@@ -18,7 +18,7 @@ export default function Filter() {
     q: "",
     authorId: "",
     categoryId: "",
-    IsFavourite: false,
+    IsFavourite: true,
     start: "",
     end: "",
   });
@@ -107,7 +107,7 @@ export default function Filter() {
                 type="date"
                 name="start"
                 value={filters.start}
-                className="bg-[#E1E1E1] w-24"
+                className="bg-[#E1E1E1] w-[100px]"
                 onChange={(e) =>
                   setFilters({ ...filters, start: e.target.value })
                 }
@@ -118,7 +118,7 @@ export default function Filter() {
                 type="date"
                 name="end"
                 value={filters.end}
-                className="bg-[#E1E1E1] w-24"
+                className="bg-[#E1E1E1] w-[100px]"
                 onChange={(e) =>
                   setFilters({ ...filters, end: e.target.value })
                 }

@@ -1,15 +1,3 @@
-// import downLogo from "../../public/assets/image/down.png";
-// import Image from "next/image";
-
-// export default function SortByDate() {
-//   return (
-//     <div className="flex  bg-[#E1E1E1] rounded-sm cursor-pointer hover:bg-gray-100 transition">
-//       <p className="text-[#6D9696] font-sm">დალაგება</p>
-//       <Image src={downLogo} alt="Sort Icon" width={18} height={18} />
-//     </div>
-//   );
-// }
-
 "use client";
 import { useState } from "react";
 import { useDispatch } from "react-redux";

@@ -17,7 +17,7 @@ export default function MainCardBlogs({
   buttCol = "bg-white",
 }: MainCardBlogsProps) {
   return (
-    <div className={`${bgColor} rounded-md w-[465px] h-[450px] flex flex-col`}>
+    <div className={`${bgColor} w-[465px] h-[450px] flex flex-col`}>
       <div className="flex justify-center items-center p-6">
         <Image
           src={Envriment.baseFileManager + "/" + image}

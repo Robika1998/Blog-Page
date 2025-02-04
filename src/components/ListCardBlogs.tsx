@@ -1,7 +1,3 @@
-
-
-"use client";
-
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
 import { useEffect, useState } from "react";
@@ -21,7 +17,7 @@ export default function ListCardBlogs() {
   }, [sortBy]);
 
   return (
-    <div className="flex flex-col bg-[#E1E1E1] w-full">
+    <div className="flex flex-col bg-[#E1E1E1] ">
       <div className="flex justify-around"></div>
       <div className="bg-[#E1E1E1] w-full">
         {error && <p className="text-red-500">Error fetching blogs: {error}</p>}
@@ -30,7 +26,7 @@ export default function ListCardBlogs() {
           <div className="flex mr-[63%]">
             <SortByDate />
           </div>
-          <div className="flex flex-wrap justify-center w-full px-4">
+          <div className="flex flex-wrap justify-center w-[90%] px-4 mx-auto ">
             {blogs.length > 0
               ? blogs.map((blog, index) => (
                   <MainCardBlogs
@@ -42,7 +38,11 @@ export default function ListCardBlogs() {
                     buttCol="bg-gray-100"
                   />
                 ))
-              : !loading && <p>No blogs available.</p>}
+              : !loading && (
+                  <p className="w-full text-center text-lg  rounded-lg p-4 ">
+                    😞 ბლოგები არ მოიძებნა
+                  </p>
+                )}
           </div>
         </div>
       </div>

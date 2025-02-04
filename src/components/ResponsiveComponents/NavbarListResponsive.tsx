@@ -8,7 +8,9 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen }) => {
   return (
     <div
       id="mobile-menu"
-      className={`${isOpen ? "block" : "hidden"} bg-bcBg text-white py-4`}
+      className={`${
+        isOpen ? "block" : "hidden"
+      } bg-bcBg text-white py-4 lg:hidden`}
     >
       <ul className="flex flex-row flex-wrap items-center justify-center gap-4">
         <li>
